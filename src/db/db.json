@@ -1,0 +1,121 @@
+{
+  "propietarios": [
+    {
+      "id": 1,
+      "nombre": "María González",
+      "dni": "30123456",
+      "telefono": "1123456789",
+      "email": "maria.gonzalez@gmail.com",
+      "direccion": "Av. Rivadavia 1234"
+    },
+    {
+      "id": 2,
+      "nombre": "Carlos Pérez",
+      "dni": "28987654",
+      "telefono": "1139876543",
+      "email": "carlos.perez@gmail.com",
+      "direccion": "San Martín 432"
+    },
+    {
+      "id": 3,
+      "nombre": "Laura Fernández",
+      "dni": "33322111",
+      "telefono": "1122223344",
+      "email": "laura.fernandez@gmail.com",
+      "direccion": "Belgrano 900"
+    }
+  ],
+
+  "mascotas": [
+    {
+      "id": 1,
+      "nombre": "Firulais",
+      "especie": "Perro",
+      "raza": "Labrador",
+      "edad": 5,
+      "sexo": "Macho",
+      "propietarioId": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Mishi",
+      "especie": "Gato",
+      "raza": "Siames",
+      "edad": 3,
+      "sexo": "Hembra",
+      "propietarioId": 2
+    },
+    {
+      "id": 3,
+      "nombre": "Rocky",
+      "especie": "Perro",
+      "raza": "Bulldog",
+      "edad": 2,
+      "sexo": "Macho",
+      "propietarioId": 3
+    }
+  ],
+
+  "turnos": [
+    {
+      "id": 1,
+      "fecha": "2025-10-25T10:00:00",
+      "motivo": "Vacunación antirrábica",
+      "mascotaId": 1,
+      "veterinario": "Dr. López",
+      "estado": "pendiente"
+    },
+    {
+      "id": 2,
+      "fecha": "2025-10-20T15:30:00",
+      "motivo": "Control general",
+      "mascotaId": 2,
+      "veterinario": "Dra. Sosa",
+      "estado": "completado"
+    },
+    {
+      "id": 3,
+      "fecha": "2025-11-01T11:00:00",
+      "motivo": "Chequeo anual",
+      "mascotaId": 3,
+      "veterinario": "Dr. Pérez",
+      "estado": "pendiente"
+    }
+  ],
+
+  "tratamientos": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "fecha": "2025-05-10",
+      "diagnostico": "Otitis",
+      "tratamiento": "Gotas óticas durante 7 días",
+      "veterinario": "Dr. López"
+    },
+    {
+      "id": 2,
+      "mascotaId": 2,
+      "fecha": "2025-03-22",
+      "diagnostico": "Gripe felina",
+      "tratamiento": "Antibióticos y reposo",
+      "veterinario": "Dra. Sosa"
+    }
+  ],
+
+  "vacunas": [
+    {
+      "id": 1,
+      "mascotaId": 1,
+      "nombre": "Antirrábica",
+      "fechaAplicacion": "2024-10-15",
+      "proximaAplicacion": "2025-10-15"
+    },
+    {
+      "id": 2,
+      "mascotaId": 2,
+      "nombre": "Triple felina",
+      "fechaAplicacion": "2025-02-10",
+      "proximaAplicacion": "2026-02-10"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { CreateTurnoDto } from 'src/DTO/CreateTurnoDto';
+import { CreateTurnoDto } from 'src/DTO/turnos/CreateTurnoDto';
+import { UpdateTurnoDto } from 'src/DTO/turnos/UpdateTurnoDto';
 
 @Injectable()
 export class TurnosService {
@@ -39,5 +40,45 @@ export class TurnosService {
     data.turnos.push(newTurno);
     this.guardarDB(data);
     return newTurno;
+  }
+
+  updateTurno(id: number, actualizarTurno: UpdateTurnoDto) {
+    const data = this.leerDB();
+
+    const index = data.turnos.findIndex((t) => t.id === id);
+
+    if (index === -1) {
+      throw new Error(`No se encontro el turno con id ${id}`);
+    }
+
+    const turnoActualizado = {
+      ...data.turnos[index],
+      ...actualizarTurno,
+      id: id,
+    };
+
+    data.turnos[index] = turnoActualizado;
+
+    this.guardarDB(data);
+
+    return turnoActualizado;
+  }
+
+  deleteTurno(id: number) {
+    const data = this.leerDB();
+
+    const index = data.turnos.findIndex((t) => t.id === id);
+
+    if (index === -1) {
+      throw new NotFoundException(`No se pudo encontrar un turno con el id ${id}`);
+    }
+
+    const turnoEliminado = data.turnos[index];
+
+    data.turnos.splice(index, 1);
+
+    this.guardarDB(data);
+
+    return turnoEliminado;
   }
 }

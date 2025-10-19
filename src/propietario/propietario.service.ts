@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { CreatePropietarioDto } from '../DTO/CreatePropietarioDto';
+import { CreatePropietarioDto } from '../DTO/propietarios/CreatePropietarioDto';
 
 @Injectable()
 export class PropietarioService {
@@ -43,4 +43,5 @@ export class PropietarioService {
 
     return newProp;
   }
+
 }

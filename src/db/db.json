@@ -99,14 +99,6 @@
   ],
   "tratamientos": [
     {
-      "id": 1,
-      "mascotaId": 1,
-      "fecha": "2025-05-10",
-      "diagnostico": "Otitis",
-      "tratamiento": "Gotas óticas durante 7 días",
-      "veterinario": "Dr. López"
-    },
-    {
       "id": 2,
       "mascotaId": 2,
       "fecha": "2025-03-22",

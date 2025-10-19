@@ -23,9 +23,16 @@
       "telefono": "1122223344",
       "email": "laura.fernandez@gmail.com",
       "direccion": "Belgrano 900"
+    },
+    {
+      "id": 4,
+      "nombre": "juan",
+      "dni": 12345675589,
+      "telefono": "987654321",
+      "email": "juan@gmail.com",
+      "direccion": "av. rivadavia 1234"
     }
   ],
-
   "mascotas": [
     {
       "id": 1,
@@ -33,7 +40,7 @@
       "especie": "Perro",
       "raza": "Labrador",
       "edad": 5,
-      "sexo": "Macho",
+      "genero": "Macho",
       "propietarioId": 1
     },
     {
@@ -42,7 +49,7 @@
       "especie": "Gato",
       "raza": "Siames",
       "edad": 3,
-      "sexo": "Hembra",
+      "genero": "Hembra",
       "propietarioId": 2
     },
     {
@@ -51,11 +58,19 @@
       "especie": "Perro",
       "raza": "Bulldog",
       "edad": 2,
-      "sexo": "Macho",
+      "genero": "Macho",
       "propietarioId": 3
+    },
+    {
+      "id": 4,
+      "nombre": "firulais2",
+      "especie": "perro grande",
+      "raza": "labrador enorme",
+      "edad": 7,
+      "genero": "hembra",
+      "propietarioId": 1
     }
   ],
-
   "turnos": [
     {
       "id": 1,
@@ -82,7 +97,6 @@
       "estado": "pendiente"
     }
   ],
-
   "tratamientos": [
     {
       "id": 1,
@@ -101,7 +115,6 @@
       "veterinario": "Dra. Sosa"
     }
   ],
-
   "vacunas": [
     {
       "id": 1,

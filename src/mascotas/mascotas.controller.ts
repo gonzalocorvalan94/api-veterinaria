@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MascotasService } from './mascotas.service';
 import { CreatePetDto } from 'src/DTO/mascotas/CreatePetDto';
 
@@ -9,6 +9,11 @@ export class MascotasController {
   @Get()
   getAll(){
     return this.mascotasService.getAll();
+  }
+
+  @Get(':id')
+  getById(@Param('id') id: number){
+    return this.mascotasService.getById(id)
   }
 
   @Post()

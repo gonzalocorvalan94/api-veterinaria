@@ -17,12 +17,12 @@ export class VacunasController {
     return this.VacunasService.createVacuna(nuevaVacuna);
   }
 
-  @Put(':id')
+  @Put('id')
   updateVacuna(@Param(':id') id:number, @Body() updateVacuna: UpdateVacunaDto){
     return this.VacunasService.updateVacuna(id, updateVacuna)
   }
 
-  @Delete(':id')
+  @Delete('id')
   deleteVacuna(@Param(':id') id:number){
     return this.VacunasService.deleteVacuna(id)
   }

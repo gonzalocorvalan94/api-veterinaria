@@ -9,10 +9,12 @@ import { TurnosService } from './turnos/turnos.service';
 import { TurnosController } from './turnos/turnos.controller';
 import { TratamientosService } from './tratamientos/tratamientos.service';
 import { TratamientosController } from './tratamientos/tratamientos.controller';
+import { VacunasService } from './vacunas/vacunas.service';
+import { VacunasController } from './vacunas/vacunas.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, MascotasController, PropietarioController, TurnosController, TratamientosController],
-  providers: [AppService, MascotasService, PropietarioService, TurnosService, TratamientosService],
+  controllers: [AppController, MascotasController, PropietarioController, TurnosController, TratamientosController, VacunasController],
+  providers: [AppService, MascotasService, PropietarioService, TurnosService, TratamientosService, VacunasService],
 })
 export class AppModule {}

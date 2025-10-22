@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PropietarioService } from './propietario.service';
 import { CreatePropietarioDto } from 'src/DTO/propietarios/CreatePropietarioDto';
+import { UpdatePropietarioDto } from 'src/DTO/propietarios/UpdatePropietarioDto';
 
 @Controller('propietario')
 export class PropietarioController {
@@ -14,6 +15,16 @@ export class PropietarioController {
   @Post()
   create(@Body() nuevoPropietario: CreatePropietarioDto) {
     return this.propietarioService.propRegister(nuevoPropietario);
+  }
+
+  @Put(':id')
+  propietarioUpdate(@Param('id') id:number, propietarioActualizado: UpdatePropietarioDto){
+    return this.propietarioService.updatePropietario(id, propietarioActualizado)
+  }
+
+  @Delete(':id')
+  deletePropietario(@Param('id') id:number){
+    return this.propietarioService.deletePropietario(id)
   }
 
 }

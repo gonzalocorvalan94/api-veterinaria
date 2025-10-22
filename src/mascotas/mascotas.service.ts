@@ -41,7 +41,6 @@ export class MascotasService {
   petRegister(nuevaMascota: CreatePetDto) {
     const data = this.leerDB();
 
-    // 🔍 Verificar que el propietario exista
     const propietarioExiste = data.propietarios.some(
       (p) => p.id === nuevaMascota.propietarioId,
     );

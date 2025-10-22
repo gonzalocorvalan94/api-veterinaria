@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreatePropietarioDto } from '../DTO/propietarios/CreatePropietarioDto';
+import { UpdatePropietarioDto } from 'src/DTO/propietarios/UpdatePropietarioDto';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class PropietarioService {
@@ -44,4 +46,43 @@ export class PropietarioService {
     return newProp;
   }
 
+  updatePropietario(id: number, propietarioUpdate: UpdatePropietarioDto) {
+    const data = this.leerDB();
+
+    const index = data.propietarios.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      throw new NotFoundException(`El usuario con id ${id} no existe`);
+    }
+
+    const propietarioActualizado = {
+      ...data.propietarios[index],
+      ...propietarioUpdate,
+      id,
+    };
+
+    data.propietarios[index] = propietarioActualizado;
+
+    this.guardarDB(data);
+
+    return propietarioActualizado;
+  }
+
+  deletePropietario(id: number) {
+    const data = this.leerDB();
+
+    const index = data.propietarios.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      throw new NotFoundException(`El propietario con id ${id} no existe`);
+    }
+
+    const propietarioEliminado = data.propietarios[index];
+
+    data.propietarios.splice(index, 1);
+
+    this.guardarDB(data);
+
+    return propietarioEliminado;
+  }
 }

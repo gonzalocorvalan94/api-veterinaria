@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreatePetDto } from 'src/DTO/mascotas/CreatePetDto';
@@ -36,6 +40,17 @@ export class MascotasService {
 
   petRegister(nuevaMascota: CreatePetDto) {
     const data = this.leerDB();
+
+    // 🔍 Verificar que el propietario exista
+    const propietarioExiste = data.propietarios.some(
+      (p) => p.id === nuevaMascota.propietarioId,
+    );
+
+    if (!propietarioExiste) {
+      throw new BadRequestException(
+        `No existe un propietario con el id ${nuevaMascota.propietarioId}`,
+      );
+    }
 
     const lastId =
       data.mascotas.length > 0

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreateVacunaDto } from 'src/DTO/vacunas/CreateVacunaDto';
@@ -25,6 +29,16 @@ export class VacunasService {
   createVacuna(nuevaVacuna: CreateVacunaDto) {
     const data = this.leerDB();
 
+    // Validar que la mascota exista
+    const mascotaExiste = data.mascotas.some(
+      (m) => m.id === nuevaVacuna.mascotaId,
+    );
+    if (!mascotaExiste) {
+      throw new BadRequestException(
+        `No existe una mascota con id ${nuevaVacuna.mascotaId}`,
+      );
+    }
+
     const lastId =
       data.vacunas.length > 0 ? Math.max(...data.vacunas.map((v) => v.id)) : 0;
 
@@ -37,7 +51,6 @@ export class VacunasService {
     };
 
     data.vacunas.push(newVacuna);
-
     this.guardarDB(data);
     return newVacuna;
   }
@@ -64,17 +77,17 @@ export class VacunasService {
     return vacunaActualizada;
   }
 
-  deleteVacuna(id:number){
+  deleteVacuna(id: number) {
     const data = this.leerDB();
 
-    const index = data.vacunas.findIndex(v => v.id === id);
+    const index = data.vacunas.findIndex((v) => v.id === id);
 
-    const vacunaEliminada = data.vacunas[index]
+    const vacunaEliminada = data.vacunas[index];
 
-    data.vacunas.splice(index,1)
+    data.vacunas.splice(index, 1);
 
     this.guardarDB(data);
 
-    return vacunaEliminada
+    return vacunaEliminada;
   }
 }

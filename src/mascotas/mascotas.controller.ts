@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { MascotasService } from './mascotas.service';
 import { CreatePetDto } from 'src/DTO/mascotas/CreatePetDto';
 import { UpdatePetDto } from 'src/DTO/mascotas/UpdatePetDto';
@@ -28,7 +36,7 @@ export class MascotasController {
   }
 
   @Delete(':id')
-  deletePet(@Param('id') id:number){
-    return this.mascotasService.deletePet(id)
+  deletePet(@Param('id') id: number) {
+    return this.mascotasService.deletePet(id);
   }
 }

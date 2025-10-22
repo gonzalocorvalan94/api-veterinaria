@@ -20,6 +20,11 @@ export class TratamientosController {
     return this.TratamientosService.getAll();
   }
 
+  @Get(':id')
+  getHistorial(id: number) {
+    return this.TratamientosService.getHistorial(id);
+  }
+
   @Post()
   create(@Body() nuevoTratamiento: CreateTratamientoDto) {
     return this.TratamientosService.createTratamiento(nuevoTratamiento);

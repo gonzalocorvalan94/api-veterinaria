@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreateTurnoDto } from 'src/DTO/turnos/CreateTurnoDto';
@@ -24,6 +28,16 @@ export class TurnosService {
 
   turnoRegister(nuevoTurno: CreateTurnoDto) {
     const data = this.leerDB();
+
+    const mascotaExiste = data.mascotas.some(
+      (m) => m.id === nuevoTurno.mascotaId,
+    );
+
+    if (!mascotaExiste) {
+      throw new BadRequestException(
+        `No existe una mascota con id ${nuevoTurno.mascotaId}`,
+      );
+    }
 
     const lastId =
       data.turnos.length > 0 ? Math.max(...data.turnos.map((t) => t.id)) : 0;
@@ -70,7 +84,9 @@ export class TurnosService {
     const index = data.turnos.findIndex((t) => t.id === id);
 
     if (index === -1) {
-      throw new NotFoundException(`No se pudo encontrar un turno con el id ${id}`);
+      throw new NotFoundException(
+        `No se pudo encontrar un turno con el id ${id}`,
+      );
     }
 
     const turnoEliminado = data.turnos[index];

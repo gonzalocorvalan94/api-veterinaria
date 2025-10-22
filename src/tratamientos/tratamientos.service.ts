@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreateTratamientoDto } from 'src/DTO/tratamientos/createTratamientoDto';
@@ -23,8 +27,30 @@ export class TratamientosService {
     return data.tratamientos;
   }
 
+  getHistorial(id: number) {
+    const data = this.leerDB();
+
+    const historial = data.tratamientos.filter((m) => m.mascotaId === id);
+
+    if (historial.length === 0) {
+      throw new NotFoundException(`La mascota que esta consultando no existe`);
+    }
+
+    return historial;
+  }
+
   createTratamiento(nuevoTratamiento: CreateTratamientoDto) {
     const data = this.leerDB();
+
+    const mascotaExiste = data.mascotas.some(
+      (m) => m.id === nuevoTratamiento.mascotaId,
+    );
+
+    if (!mascotaExiste) {
+      throw new BadRequestException(
+        `No existe una mascota con el id ${nuevoTratamiento.mascotaId}`,
+      );
+    }
 
     const lastId =
       data.tratamientos.length > 0
@@ -40,7 +66,7 @@ export class TratamientosService {
       veterinario: nuevoTratamiento.veterinario,
     };
 
-    data.tratamiento.push(newTratamiento);
+    data.tratamientos.push(newTratamiento);
 
     this.guardarDB(data);
 

@@ -1,19 +1,9 @@
-import {
-  IsDateString,
-  IsInt,
-  IsNotEmpty,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
 
 export class CreateTratamientoDto {
   @IsInt({ message: 'El ID de la mascota debe ser un número entero' })
   @Min(1, { message: 'El ID de la mascota debe ser mayor que 0' })
   mascotaId: number;
-
-  @IsDateString({}, { message: 'La fecha debe ser válida en formato ISO' })
-  @IsNotEmpty({ message: 'La fecha es obligatoria' })
-  fecha: string;
 
   @IsString({ message: 'El diagnóstico debe ser texto' })
   @IsNotEmpty({ message: 'El diagnóstico es obligatorio' })

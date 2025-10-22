@@ -57,10 +57,13 @@ export class TratamientosService {
         ? Math.max(...data.tratamientos.map((t) => t.id))
         : 0;
 
+    const ahora = new Date();
+    const fechaLocal = `${ahora.toLocaleDateString('es-AR')} ${ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
+
     const newTratamiento = {
       id: lastId + 1,
       mascotaId: nuevoTratamiento.mascotaId,
-      fecha: nuevoTratamiento.fecha,
+      fecha: fechaLocal,
       diagnostico: nuevoTratamiento.diagnostico,
       tratamiento: nuevoTratamiento.tratamiento,
       veterinario: nuevoTratamiento.veterinario,
@@ -73,7 +76,7 @@ export class TratamientosService {
     return newTratamiento;
   }
 
-  updateTratamiento(id: number, tratamientoActualizado: UpdateTratamientoDto) {
+  updateTratamiento(id: number, tratamientoActualizado: CreateTratamientoDto) {
     const data = this.leerDB();
 
     const index = data.tratamientos.findIndex((t) => t.id === id);
@@ -82,10 +85,16 @@ export class TratamientosService {
       throw new NotFoundException(`El tratamiento con id ${id} no existe`);
     }
 
+    const ahora = new Date();
+    const fechaLocal = `${ahora.toLocaleDateString('es-AR')} ${ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
+
     const tratamientoUpdate = {
-      ...data.tratamientos[index],
-      ...tratamientoActualizado,
       id,
+      mascotaId: tratamientoActualizado.mascotaId,
+      fecha: fechaLocal,
+      diagnostico: tratamientoActualizado.diagnostico,
+      tratamiento: tratamientoActualizado.tratamiento,
+      veterinario: tratamientoActualizado.veterinario,
     };
 
     data.tratamientos[index] = tratamientoUpdate;

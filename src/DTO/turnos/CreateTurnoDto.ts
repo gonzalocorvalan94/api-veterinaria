@@ -1,7 +1,7 @@
 import { IsDateString, IsIn, IsInt, IsNotEmpty, IsString, Min } from "class-validator";
 
 export class CreateTurnoDto {
-  @IsDateString({}, { message: 'La fecha debe ser una fecha válida en formato ISO' })
+  @IsDateString({}, { message: 'La fecha debe ser una fecha válida en formato ISO. Ejemplo 2025-10-25T10:00:00  AAAA-MM-DDT:HH:MM:SS' })
   @IsNotEmpty({ message: 'La fecha es obligatoria' })
   fecha: string;
 

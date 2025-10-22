@@ -31,7 +31,7 @@ export class MascotasController {
   }
 
   @Put(':id')
-  updatePet(@Param('id') id: number, actualizarMascota: UpdatePetDto) {
+  updatePet(@Param('id') id: number, @Body() actualizarMascota: UpdatePetDto) {
     return this.mascotasService.updatePet(id, actualizarMascota);
   }
 

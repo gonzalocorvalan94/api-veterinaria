@@ -18,7 +18,7 @@ export class TurnosController {
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() actualizarTurno : UpdateTurnoDto){
+  update(@Param('id') id: number, @Body() actualizarTurno : CreateTurnoDto){
     return this.turnosService.updateTurno(id, actualizarTurno)
   }
 

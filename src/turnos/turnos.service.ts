@@ -39,6 +39,12 @@ export class TurnosService {
       );
     }
 
+    const fechaTurno = new Date(nuevoTurno.fecha);
+    const ahora = new Date();
+    if (fechaTurno <= ahora) {
+      throw new BadRequestException(`La fecha del turno debe ser futura`);
+    }
+
     const lastId =
       data.turnos.length > 0 ? Math.max(...data.turnos.map((t) => t.id)) : 0;
 
@@ -56,23 +62,39 @@ export class TurnosService {
     return newTurno;
   }
 
-  updateTurno(id: number, actualizarTurno: UpdateTurnoDto) {
+  updateTurno(id: number, actualizarTurno: CreateTurnoDto) {
     const data = this.leerDB();
 
     const index = data.turnos.findIndex((t) => t.id === id);
-
     if (index === -1) {
-      throw new Error(`No se encontro el turno con id ${id}`);
+      throw new NotFoundException(`No se encontró el turno con id ${id}`);
+    }
+
+    const mascotaExiste = data.mascotas.some(
+      (m) => m.id === actualizarTurno.mascotaId,
+    );
+    if (!mascotaExiste) {
+      throw new BadRequestException(
+        `No existe una mascota con id ${actualizarTurno.mascotaId}`,
+      );
+    }
+
+    const fechaTurno = new Date(actualizarTurno.fecha);
+    const ahora = new Date();
+    if (fechaTurno <= ahora) {
+      throw new BadRequestException(`La fecha del turno debe ser futura`);
     }
 
     const turnoActualizado = {
-      ...data.turnos[index],
-      ...actualizarTurno,
-      id: id,
+      id,
+      fecha: actualizarTurno.fecha,
+      motivo: actualizarTurno.motivo,
+      mascotaId: actualizarTurno.mascotaId,
+      veterinario: actualizarTurno.veterinario,
+      estado: actualizarTurno.estado,
     };
 
     data.turnos[index] = turnoActualizado;
-
     this.guardarDB(data);
 
     return turnoActualizado;

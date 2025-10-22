@@ -21,7 +21,7 @@ export class TratamientosController {
   }
 
   @Get(':id')
-  getHistorial(id: number) {
+  getHistorial(@Param('id') id: number) {
     return this.TratamientosService.getHistorial(id);
   }
 
@@ -33,7 +33,7 @@ export class TratamientosController {
   @Put(':id')
   update(
     @Param('id') id: number,
-    @Body() updateTratamiento: UpdateTratamientoDto,
+    @Body() updateTratamiento: CreateTratamientoDto,
   ) {
     return this.TratamientosService.updateTratamiento(id, updateTratamiento);
   }

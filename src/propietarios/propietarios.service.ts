@@ -1,9 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CreatePropietarioDto } from '../DTO/propietarios/CreatePropietarioDto';
 import { UpdatePropietarioDto } from 'src/DTO/propietarios/UpdatePropietarioDto';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class PropietarioService {
@@ -26,6 +29,16 @@ export class PropietarioService {
   propRegister(nuevoPropietario: CreatePropietarioDto) {
     const data = this.leerDB();
 
+    const existeDni = data.propietarios.some(
+      (p) => p.dni === nuevoPropietario.dni,
+    );
+
+    if (existeDni) {
+      throw new BadRequestException(
+        `Ya existe un propietario con el DNI ${nuevoPropietario.dni}`,
+      );
+    }
+
     const lastId =
       data.propietarios.length > 0
         ? Math.max(...data.propietarios.map((p) => p.id))
@@ -46,7 +59,7 @@ export class PropietarioService {
     return newProp;
   }
 
-  updatePropietario(id: number, propietarioUpdate: UpdatePropietarioDto) {
+  updatePropietario(id: number, propietarioUpdate: CreatePropietarioDto) {
     const data = this.leerDB();
 
     const index = data.propietarios.findIndex((p) => p.id === id);
@@ -55,10 +68,13 @@ export class PropietarioService {
       throw new NotFoundException(`El usuario con id ${id} no existe`);
     }
 
-    const propietarioActualizado = {
-      ...data.propietarios[index],
-      ...propietarioUpdate,
+    const propietarioActualizado: any = {
       id,
+      nombre: propietarioUpdate.nombre,
+      dni: propietarioUpdate.dni,
+      telefono: propietarioUpdate.telefono,
+      email: propietarioUpdate.email,
+      direccion: propietarioUpdate.direccion,
     };
 
     data.propietarios[index] = propietarioActualizado;

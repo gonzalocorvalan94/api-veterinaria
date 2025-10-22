@@ -29,13 +29,28 @@ export class VacunasService {
   createVacuna(nuevaVacuna: CreateVacunaDto) {
     const data = this.leerDB();
 
-    // Validar que la mascota exista
     const mascotaExiste = data.mascotas.some(
       (m) => m.id === nuevaVacuna.mascotaId,
     );
     if (!mascotaExiste) {
       throw new BadRequestException(
         `No existe una mascota con id ${nuevaVacuna.mascotaId}`,
+      );
+    }
+
+    const fechaAplicacion = new Date(nuevaVacuna.fechaAplicacion);
+    const proximaAplicacion = new Date(nuevaVacuna.proximaAplicacion);
+    const ahora = new Date();
+
+    if (fechaAplicacion > ahora) {
+      throw new BadRequestException(
+        `La fecha de aplicación no puede ser futura`,
+      );
+    }
+
+    if (proximaAplicacion <= ahora) {
+      throw new BadRequestException(
+        `La próxima aplicación debe ser una fecha futura`,
       );
     }
 
@@ -55,23 +70,47 @@ export class VacunasService {
     return newVacuna;
   }
 
-  updateVacuna(id: number, updateVacuna: UpdateVacunaDto) {
+  updateVacuna(id: number, updateVacuna: CreateVacunaDto) {
     const data = this.leerDB();
 
     const index = data.vacunas.findIndex((v) => v.id === id);
-
     if (index === -1) {
       throw new NotFoundException(`No se encontró una vacuna con el id ${id}`);
     }
 
+    const mascotaExiste = data.mascotas.some(
+      (m) => m.id === updateVacuna.mascotaId,
+    );
+    if (!mascotaExiste) {
+      throw new BadRequestException(
+        `No existe una mascota con id ${updateVacuna.mascotaId}`,
+      );
+    }
+
+    const fechaAplicacion = new Date(updateVacuna.fechaAplicacion);
+    const proximaAplicacion = new Date(updateVacuna.proximaAplicacion);
+    const ahora = new Date();
+
+    if (fechaAplicacion > ahora) {
+      throw new BadRequestException(
+        `La fecha de aplicación no puede ser futura`,
+      );
+    }
+    if (proximaAplicacion <= ahora) {
+      throw new BadRequestException(
+        `La próxima aplicación debe ser una fecha futura`,
+      );
+    }
+
     const vacunaActualizada = {
-      ...data.vacunas[index],
-      ...updateVacuna,
-      id: id,
+      id,
+      mascotaId: updateVacuna.mascotaId,
+      nombre: updateVacuna.nombre,
+      fechaAplicacion: updateVacuna.fechaAplicacion,
+      proximaAplicacion: updateVacuna.proximaAplicacion,
     };
 
     data.vacunas[index] = vacunaActualizada;
-
     this.guardarDB(data);
 
     return vacunaActualizada;

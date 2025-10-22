@@ -18,7 +18,7 @@ export class VacunasController {
   }
 
   @Put('id')
-  updateVacuna(@Param(':id') id:number, @Body() updateVacuna: UpdateVacunaDto){
+  updateVacuna(@Param(':id') id:number, @Body() updateVacuna: CreateVacunaDto){
     return this.VacunasService.updateVacuna(id, updateVacuna)
   }
 

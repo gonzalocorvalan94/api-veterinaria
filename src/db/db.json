@@ -26,22 +26,30 @@
     },
     {
       "id": 4,
-      "nombre": "juan",
-      "dni": 12345675589,
-      "telefono": "987654321",
-      "email": "juan@gmail.com",
-      "direccion": "av. rivadavia 1234"
+      "nombre": "Juan López",
+      "dni": "40123456",
+      "telefono": "1145678901",
+      "email": "juan.lopez@gmail.com",
+      "direccion": "Av. Libertador 500"
+    },
+    {
+      "id": 5,
+      "nombre": "juan lópez perez222",
+      "dni": "40123456321",
+      "telefono": "1145678901",
+      "email": "juan.lopez@gmail.com",
+      "direccion": "av. libertador 500"
     }
   ],
   "mascotas": [
     {
       "id": 1,
-      "nombre": "Firulais",
-      "especie": "Perro",
-      "raza": "Labrador",
+      "nombre": "firulais2",
+      "especie": "perro",
+      "raza": "labrador2",
       "edad": 5,
-      "genero": "Macho",
-      "propietarioId": 1
+      "genero": "macho",
+      "propietarioId": 4
     },
     {
       "id": 2,
@@ -63,12 +71,21 @@
     },
     {
       "id": 4,
-      "nombre": "firulais2",
-      "especie": "perro grande",
-      "raza": "labrador enorme",
-      "edad": 7,
-      "genero": "hembra",
+      "nombre": "Luna",
+      "especie": "Gato",
+      "raza": "Persa",
+      "edad": 4,
+      "genero": "Hembra",
       "propietarioId": 1
+    },
+    {
+      "id": 5,
+      "nombre": "Thor",
+      "especie": "Perro",
+      "raza": "Pastor Alemán",
+      "edad": 6,
+      "genero": "Macho",
+      "propietarioId": 4
     }
   ],
   "turnos": [
@@ -83,7 +100,7 @@
     {
       "id": 2,
       "fecha": "2025-10-20T15:30:00",
-      "motivo": "Control general",
+      "motivo": "Control parcial",
       "mascotaId": 2,
       "veterinario": "Dra. Sosa",
       "estado": "completado"
@@ -95,16 +112,56 @@
       "mascotaId": 3,
       "veterinario": "Dr. Pérez",
       "estado": "pendiente"
+    },
+    {
+      "id": 4,
+      "fecha": "2025-11-05T14:00:00",
+      "motivo": "Vacunación",
+      "mascotaId": 4,
+      "veterinario": "Dra. Sosa",
+      "estado": "pendiente"
+    },
+    {
+      "id": 5,
+      "fecha": "2025-11-10T09:30:00",
+      "motivo": "Consulta general",
+      "mascotaId": 5,
+      "veterinario": "Dr. López",
+      "estado": "pendiente"
     }
   ],
   "tratamientos": [
     {
+      "id": 1,
+      "mascotaId": 1,
+      "fecha": "2025-03-22",
+      "diagnostico": "Otitis",
+      "tratamiento": "Antibióticos y limpieza",
+      "veterinario": "Dr. López"
+    },
+    {
       "id": 2,
       "mascotaId": 2,
-      "fecha": "2025-03-22",
+      "fecha": "2025-04-10",
       "diagnostico": "Gripe felina",
-      "tratamiento": "Antibióticos y reposo",
+      "tratamiento": "Reposo y suero",
       "veterinario": "Dra. Sosa"
+    },
+    {
+      "id": 3,
+      "mascotaId": 3,
+      "fecha": "2025-05-05",
+      "diagnostico": "Parásitos intestinales",
+      "tratamiento": "Desparasitante oral",
+      "veterinario": "Dr. Pérez"
+    },
+    {
+      "id": 4,
+      "mascotaId": 1,
+      "fecha": "22/10/2025 11:20",
+      "diagnostico": "Problema dental",
+      "tratamiento": "Limpieza dental",
+      "veterinario": "Dr. López Gonzalez"
     }
   ],
   "vacunas": [
@@ -121,6 +178,27 @@
       "nombre": "Triple felina",
       "fechaAplicacion": "2025-02-10",
       "proximaAplicacion": "2026-02-10"
+    },
+    {
+      "id": 3,
+      "mascotaId": 3,
+      "nombre": "Leucemia felina",
+      "fechaAplicacion": "2025-03-01",
+      "proximaAplicacion": "2026-03-01"
+    },
+    {
+      "id": 4,
+      "mascotaId": 4,
+      "nombre": "Triple felina",
+      "fechaAplicacion": "2025-05-10",
+      "proximaAplicacion": "2026-05-10"
+    },
+    {
+      "id": 5,
+      "mascotaId": 5,
+      "nombre": "Antirrábica",
+      "fechaAplicacion": "2025-06-15",
+      "proximaAplicacion": "2026-06-15"
     }
   ]
 }

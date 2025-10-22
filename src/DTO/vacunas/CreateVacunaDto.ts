@@ -10,6 +10,7 @@ export class CreateVacunaDto {
   nombre: string;
 
   @IsDateString({}, { message: 'La fecha de aplicación debe ser una fecha válida en formato ISO (YYYY-MM-DD)' })
+  
   @IsNotEmpty({ message: 'La fecha de aplicación es obligatoria' })
   fechaAplicacion: string;
 

@@ -81,10 +81,23 @@ export class MascotasService {
       throw new NotFoundException(`La mascota con el id ${id} no existe`);
     }
 
+    const propietarioExiste = data.propietarios.some(
+      (p) => p.id === mascotaActualizada.propietarioId,
+    );
+    if (!propietarioExiste) {
+      throw new BadRequestException(
+        `El propietario con id ${mascotaActualizada.propietarioId} no existe`,
+      );
+    }
+
     const mascotaUpdate = {
-      ...data.mascotas[index],
-      ...mascotaActualizada,
       id,
+      nombre: mascotaActualizada.nombre,
+      especie: mascotaActualizada.especie,
+      raza: mascotaActualizada.raza,
+      edad: mascotaActualizada.edad,
+      genero: mascotaActualizada.genero,
+      propietarioId: mascotaActualizada.propietarioId,
     };
 
     data.mascotas[index] = mascotaUpdate;
